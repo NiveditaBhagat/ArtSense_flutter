@@ -1,0 +1,15 @@
+0 Optical Art
+1 Realism
+2 ArtDeco
+3 Abstract
+4 Cubism
+5 Pop Art
+6 Japanese Art
+7 Romanticism
+8 Expressionism
+9 Symbolism
+10 Pattachitra
+11 Warli
+12 Rajput Painting
+13 Madhubani
+14 Impressionism
