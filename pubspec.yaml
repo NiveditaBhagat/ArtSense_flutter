@@ -40,6 +40,7 @@ dependencies:
   flutter_tflite: ^1.0.1
   carousel_slider: ^4.2.1
   http: ^1.0.0
+  flutter_staggered_grid_view: ^0.6.2
 
 dev_dependencies:
   flutter_test:
@@ -69,7 +70,7 @@ flutter:
     - assets/img/image2.jpg
     - assets/img/image3.jpg
     - assets/img/image4.jpg
-    - assets/img/image5.jpeg
+    - assets/img/image5.jpg
     - assets/labels.txt
     - assets/model.tflite
 

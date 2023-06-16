@@ -35,15 +35,15 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(20.0),
+      
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: CarouselSlider(
                   options: CarouselOptions(
-                    height: double.infinity,
-                    aspectRatio: 2.0,
+                    height: 220,
+                    aspectRatio: 1,
                     enlargeCenterPage: true,
                     enableInfiniteScroll: true,
                     autoPlay: true,
@@ -77,27 +77,33 @@ class _HomeScreenState extends State<HomeScreen> {
                   }).toList(),
                 ),
               ),
-              SizedBox(height: 26),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Text(
-                  'Most Viewed Paintings',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              Container(
-                height: 210,
+           
+       
+              GestureDetector(
+                onTap: (){},
+                child: Container(
+                  height: 200,
+                  margin: EdgeInsets.only(left: 15, right: 15),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/img/image5.jpg'),
+                      fit: BoxFit.cover,
+                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.4), BlendMode.darken),
               
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/img/image5.jpeg'),
-                    fit: BoxFit.contain,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  borderRadius: BorderRadius.circular(10),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                        'Most Viewed Paintings',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
               ),
               SizedBox(height: 25),
