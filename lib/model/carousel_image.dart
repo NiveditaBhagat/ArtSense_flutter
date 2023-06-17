@@ -13,3 +13,17 @@ class CarouselImage {
     );
   }
 }
+
+class PopularImage{
+  final String popular_title;
+  final String popular_paintings;
+
+  PopularImage({required this.popular_paintings, required this.popular_title});
+
+  factory PopularImage.fromJson(Map<String, dynamic> json){
+    return PopularImage(
+      popular_paintings: json['image'], 
+      popular_title: json['title'],
+      );
+  }
+}

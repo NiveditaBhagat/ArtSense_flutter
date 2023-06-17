@@ -39,8 +39,11 @@ dependencies:
   introduction_slider: ^2.0.1
   flutter_tflite: ^1.0.1
   carousel_slider: ^4.2.1
-  http: ^1.0.0
   flutter_staggered_grid_view: ^0.6.2
+  
+dependency_overrides:
+  cached_network_image: any
+  http: ^1.0.0
 
 dev_dependencies:
   flutter_test:

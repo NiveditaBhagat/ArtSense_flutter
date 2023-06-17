@@ -21,3 +21,41 @@ class CarouselApi {
     }
   }
 }
+
+class PaintingAPI {
+  static const String apiUrl =
+      'https://www.wikiart.org/en/popular-paintings?json=1&page=';
+
+  int currentPage = 1;
+  bool isLoading = false;
+
+  Future<List<PopularImage>> fetchPaintings() async {
+    if (isLoading) {
+      return []; // Return empty list if already loading to avoid duplicate requests
+    }
+
+    isLoading = true;
+
+    final String url = apiUrl + currentPage.toString();
+
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final List<dynamic> jsonResponse = json.decode(response.body);
+        final paintings = jsonResponse
+            .map((paintingData) => PopularImage.fromJson(paintingData))
+            .toList();
+
+        currentPage++; // Increment the current page for the next request
+        isLoading = false; // Reset the loading flag
+
+        return paintings;
+      } else {
+        throw Exception('Failed to fetch paintings');
+      }
+    } catch (error) {
+      isLoading = false; // Reset the loading flag on error
+      throw error;
+    }
+  }
+}
