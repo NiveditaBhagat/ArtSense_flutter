@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_art_sense/controller/carousel_api.dart';
 import 'package:flutter_art_sense/model/carousel_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_art_sense/screens/popular_paintings.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -80,7 +81,9 @@ class _HomeScreenState extends State<HomeScreen> {
            
        
               GestureDetector(
-                onTap: (){},
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>PopularPaintingScreen()));
+                },
                 child: Container(
                   height: 200,
                   margin: EdgeInsets.only(left: 15, right: 15),
