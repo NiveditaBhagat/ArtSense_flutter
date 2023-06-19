@@ -27,3 +27,19 @@ class PopularImage{
       );
   }
 }
+
+class Artists{
+  final String ArtistName;
+  final String ArtistImage;
+  final String WikiUrl;
+
+  Artists({required this.ArtistImage, required this.WikiUrl, required this.ArtistName});
+
+  factory Artists.fromJson(Map<String, dynamic> json){
+    return Artists(
+    ArtistImage: json['image'],
+    ArtistName: json['artistName'],
+    WikiUrl: json['wikipediaUrl'],
+    );
+  }
+}
