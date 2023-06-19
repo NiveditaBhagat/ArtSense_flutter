@@ -11,11 +11,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<CarouselImage> images = [];
+  List<Artists> mostViewedArtists = [];
 
   @override
   void initState() {
     super.initState();
     fetchImages();
+     fetchArtists();
   }
 
   Future<void> fetchImages() async {
@@ -29,6 +31,17 @@ class _HomeScreenState extends State<HomeScreen> {
       print(error.toString());
     }
   }
+
+  Future<void> fetchArtists() async {
+  try {
+    final List<Artists> fetchedArtists = await ArtistsController.fetchArtists();
+    setState(() {
+      mostViewedArtists = fetchedArtists;
+    });
+  } catch (error) {
+    print(error.toString());
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -109,9 +122,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 25),
+              SizedBox(height: 21),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Text(
                   'Most Popular Artists',
                   style: TextStyle(
@@ -121,23 +134,56 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              Container(
-                height: 100,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CircleAvatar(
-                        radius: 40,
-                        backgroundColor: Colors.white,
-                      ),
-                    );
-                  },
-                ),
+            Container(
+               height: 125,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: mostViewedArtists.length,
+                 itemBuilder: (BuildContext context, int index) {
+                  final artist = mostViewedArtists[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: GestureDetector(
+                      onTap: () {
+                                      // Handle tapping on the artist
+                          },
+                    child: Stack(
+                      children: [
+                        Container(
+                         width: 100,
+                         decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(15),
+                         image: DecorationImage(
+                         image: NetworkImage(artist.ArtistImage),
+                          fit: BoxFit.cover,
               ),
+            ),
+
+          ),
+                     
+                        Positioned(
+                          bottom: 5,
+                          left: 5,
+                          child: Text(
+                            
+                              artist.ArtistName,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                  
+                      ],
+                    ),
+        ),
+      );
+    },
+  ),
+),
+
             ],
           ),
         ),

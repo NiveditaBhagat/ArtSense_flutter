@@ -74,6 +74,7 @@ flutter:
     - assets/img/image3.jpg
     - assets/img/image4.jpg
     - assets/img/image5.jpg
+    - assets/img/download.jpeg
     - assets/labels.txt
     - assets/model.tflite
 

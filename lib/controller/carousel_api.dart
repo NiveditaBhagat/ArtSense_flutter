@@ -59,3 +59,33 @@ class PaintingAPI {
     }
   }
 }
+
+class ArtistsController {
+  static const String apiUrl = 'https://www.wikiart.org/en/app/api/popularartists?json=1';
+
+  static Future<List<Artists>> fetchArtists() async {
+    try {
+      final response = await http.get(Uri.parse(apiUrl));
+
+      if (response.statusCode == 200) {
+        final List<dynamic> jsonResponse = json.decode(response.body);
+        final List<Artists> artists = [];
+
+        for (final artistData in jsonResponse) {
+          artists.add(Artists.fromJson(artistData));
+        }
+
+        return artists;
+      } else {
+        throw Exception('Failed to fetch artists');
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+}
+
+
+
+
+
