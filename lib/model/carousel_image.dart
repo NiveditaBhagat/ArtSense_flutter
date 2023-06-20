@@ -32,8 +32,9 @@ class Artists{
   final String ArtistName;
   final String ArtistImage;
   final String WikiUrl;
+  String article;
 
-  Artists({required this.ArtistImage, required this.WikiUrl, required this.ArtistName});
+  Artists({required this.ArtistImage, required this.WikiUrl, required this.ArtistName, this.article = '', });
 
   factory Artists.fromJson(Map<String, dynamic> json){
     return Artists(

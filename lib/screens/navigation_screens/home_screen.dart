@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_art_sense/controller/carousel_api.dart';
 import 'package:flutter_art_sense/model/carousel_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_art_sense/screens/artists_detail.dart';
 import 'package:flutter_art_sense/screens/popular_paintings.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -135,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             Container(
-               height: 125,
+               height: 135,
               child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
@@ -143,15 +144,20 @@ class _HomeScreenState extends State<HomeScreen> {
                  itemBuilder: (BuildContext context, int index) {
                   final artist = mostViewedArtists[index];
                   return Padding(
-                    padding: const EdgeInsets.all(6.0),
+                    padding: const EdgeInsets.all(7.0),
                     child: GestureDetector(
                       onTap: () {
-                                      // Handle tapping on the artist
+                               Navigator.push(context, MaterialPageRoute(builder: (context)=>ArtistDetail(
+                                artistImage: artist.ArtistImage,
+                                artistName: artist.ArtistName,
+                                
+                                )));       
                           },
                     child: Stack(
                       children: [
                         Container(
                          width: 100,
+                         height: 100,
                          decoration: BoxDecoration(
                          borderRadius: BorderRadius.circular(15),
                          image: DecorationImage(
@@ -163,14 +169,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
                      
                         Positioned(
-                          bottom: 5,
-                          left: 5,
+                          bottom: 0,
+                          left: 6,
                           child: Text(
                             
                               artist.ArtistName,
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 11,
+                              fontSize: 12,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -183,7 +189,8 @@ class _HomeScreenState extends State<HomeScreen> {
     },
   ),
 ),
-
+      SizedBox(height: 11,),
+                    
             ],
           ),
         ),
