@@ -4,7 +4,6 @@ import 'package:flutter_art_sense/screens/navigation_screens/collection_screen.d
 import 'package:flutter_art_sense/screens/navigation_screens/home_screen.dart';
 import 'package:flutter_art_sense/screens/navigation_screens/scan_screen.dart';
 import 'package:flutter_art_sense/screens/navigation_screens/search_screen.dart';
-import 'package:flutter_art_sense/screens/navigation_screens/setting_screen.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -19,7 +18,7 @@ class _HomePageState extends State<HomePage> {
     SearchScreen(),
     ScannerScreen(),
     Collectionscreen(),
-    SettingScreen(),
+
 
   ];
 
@@ -51,16 +50,13 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.camera_alt),
-            label: '',
+            label: 'Scan',
              ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
             label: 'Favorites',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'settings',
-          ),
+         
         ],
       ),
       body: Center(
