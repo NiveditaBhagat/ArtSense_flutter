@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                Navigator.push(context, MaterialPageRoute(builder: (context)=>ArtistDetail(
                                 artistImage: artist.ArtistImage,
                                 artistName: artist.ArtistName,
-                                
+                                wikiUrl: artist.WikiUrl,
                                 )));       
                           },
                     child: Stack(

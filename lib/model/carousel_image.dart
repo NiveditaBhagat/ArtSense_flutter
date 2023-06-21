@@ -1,5 +1,7 @@
 import 'dart:convert';
-
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+import 'package:html/parser.dart' show parse;
 class CarouselImage {
   final String title;
   final String image;
@@ -43,4 +45,7 @@ class Artists{
     WikiUrl: json['wikipediaUrl'],
     );
   }
+
 }
+
+
