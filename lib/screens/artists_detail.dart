@@ -44,6 +44,7 @@ class ArtistDetail extends StatefulWidget {
 
 class _ArtistDetailState extends State<ArtistDetail> {
   String article = '';
+   String desiredSection = '';
 
   @override
   void initState() {
@@ -63,44 +64,47 @@ class _ArtistDetailState extends State<ArtistDetail> {
   }
 
   Future<String> fetchArticleContent(String wikiUrl) async {
-  try {
-    var response = await http.get(Uri.parse(wikiUrl));
+    try {
+      var response = await http.get(Uri.parse(wikiUrl));
 
-    if (response.statusCode == 200) {
-      var document = parse(response.body);
-      var content = document.querySelector('.mw-parser-output');
+      if (response.statusCode == 200) {
+        var document = parse(response.body);
+        var content = document.querySelector('.mw-parser-output');
 
-      if (content != null) {
-        // Find the desired section using its class or ID
-        var desiredSection = content.querySelector('.desired-section');
-        if (desiredSection != null) {
-          removeStyling(desiredSection);
-          return desiredSection.text;
+        if (content != null) {
+          return extractDesiredSection(content);
         } else {
-          throw Exception('Failed to find the desired section');
+          throw Exception('Failed to parse article content');
         }
       } else {
-        throw Exception('Failed to parse article content');
+        throw Exception('Failed to fetch article content');
       }
-    } else {
-      throw Exception('Failed to fetch article content');
+    } catch (e) {
+      throw Exception('Error: $e');
     }
-  } catch (e) {
-    throw Exception('Error: $e');
   }
+
+
+
+String extractDesiredSection(dom.Element content) {
+  var paragraphs = content.getElementsByTagName('p');
+  var desiredSection = '';
+
+  // Find the desired section based on specific criteria
+  for (var i = 0; i < paragraphs.length; i++) {
+    var paragraph = paragraphs[i];
+    var paragraphText = paragraph.text.trim();
+
+    // Adjust the conditions to match the criteria for the desired section
+    if (paragraphText.isNotEmpty && paragraphText.length > 50) {
+      desiredSection = paragraphText;
+      break;
+    }
+  }
+
+  return desiredSection;
 }
 
-
-  void removeStyling(dom.Element element) {
-    element.nodes.forEach((node) {
-      if (node is dom.Element) {
-        if (node.attributes.containsKey('style')) {
-          node.attributes.remove('style');
-        }
-        removeStyling(node);
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,8 +153,13 @@ class _ArtistDetailState extends State<ArtistDetail> {
                     topLeft: Radius.circular(35),
                     topRight: Radius.circular(35),
                   ),
-                  color: Colors.white,
+                 
+                  
+
+              color: Colors.white
                 ),
+                
+         
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -165,9 +174,12 @@ class _ArtistDetailState extends State<ArtistDetail> {
                       SizedBox(height: 10),
                       Expanded(
                         child: SingleChildScrollView(
-                          child: Text(
-                            article,
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                               article,
+                              style: TextStyle(fontSize: 21, color: Colors.black),
+                            ),
                           ),
                         ),
                       ),
