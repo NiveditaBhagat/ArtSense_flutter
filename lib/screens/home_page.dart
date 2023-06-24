@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   var pageIndex=[
      HomeScreen(),
     SearchScreen(),
-    ScannerScreen(),
+    ScanningScreen(),
     Collectionscreen(),
 
 
