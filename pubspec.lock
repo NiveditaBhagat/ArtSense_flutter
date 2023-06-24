@@ -313,7 +313,7 @@ packages:
     source: hosted
     version: "4.0.2"
   image:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: image
       sha256: "8e9d133755c3e84c73288363e6343157c383a0c6c56fc51afcc5d4d7180306d6"
@@ -321,13 +321,13 @@ packages:
     source: hosted
     version: "3.3.0"
   image_picker:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: image_picker
-      sha256: "6432178560d95303cc70d038363f892f5a05750dd27bc55220c7301af54d05e9"
+      sha256: b6951e25b795d053a6ba03af5f710069c99349de9341af95155d52665cb4607c
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.8.8"
+    version: "0.8.9"
   image_picker_android:
     dependency: transitive
     description:
@@ -457,7 +457,7 @@ packages:
     source: hosted
     version: "1.8.3"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
       sha256: "3087813781ab814e4157b172f1a11c46be20179fcc9bea043e0fba36bc0acaa2"
