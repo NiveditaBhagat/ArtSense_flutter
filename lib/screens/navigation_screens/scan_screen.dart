@@ -26,13 +26,13 @@ class _ScanningScreenState extends State<ScanningScreen> {
 
   Future<void> initializeCamera() async {
     final cameras = await availableCameras();
-    final frontCamera = cameras.firstWhere(
-      (camera) => camera.lensDirection == CameraLensDirection.front,
+    final rearCamera = cameras.firstWhere(
+      (camera) => camera.lensDirection == CameraLensDirection.back,
       orElse: () => cameras.first,
     );
 
     _cameraController = CameraController(
-      frontCamera,
+      rearCamera,
       ResolutionPreset.medium,
     );
 
@@ -59,7 +59,9 @@ class _ScanningScreenState extends State<ScanningScreen> {
   Future<void> runModel(File imageFile) async {
     if (imageFile != null) {
       img.Image image = img.decodeImage(imageFile.readAsBytesSync())!;
-      Uint8List imageBytes = imageToByteListUint8(image, 224);
+      img.Image resizedImage = img.copyResize(image, width: 224, height: 224);
+
+      Uint8List imageBytes = imageToByteListUint8(resizedImage);
 
       var recognitions = await Tflite.runModelOnBinary(
         binary: imageBytes,
@@ -83,19 +85,19 @@ class _ScanningScreenState extends State<ScanningScreen> {
     }
   }
 
-  Uint8List imageToByteListUint8(img.Image image, int inputSize) {
-    var convertedBytes = Uint8List(1 * inputSize * inputSize * 3);
+  Uint8List imageToByteListUint8(img.Image image) {
+    var convertedBytes = Uint8List(602112);
     var buffer = Uint8List.view(convertedBytes.buffer);
     int pixelIndex = 0;
-    for (var i = 0; i < inputSize; i++) {
-      for (var j = 0; j < inputSize; j++) {
+    for (var i = 0; i < 224; i++) {
+      for (var j = 0; j < 224; j++) {
         var pixel = image.getPixel(j, i);
         buffer[pixelIndex++] = img.getRed(pixel);
         buffer[pixelIndex++] = img.getGreen(pixel);
         buffer[pixelIndex++] = img.getBlue(pixel);
       }
     }
-    return convertedBytes.buffer.asUint8List();
+    return convertedBytes;
   }
 
   @override
@@ -139,7 +141,7 @@ class _ScanningScreenState extends State<ScanningScreen> {
                   SizedBox(height: 16.0),
                   Text(
                     _output,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                   ),
                 ],
               ),
