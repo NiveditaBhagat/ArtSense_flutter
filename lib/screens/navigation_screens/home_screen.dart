@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_art_sense/controller/carousel_api.dart';
-import 'package:flutter_art_sense/model/carousel_image.dart';
+import 'package:flutter_art_sense/controller/controller.dart';
+import 'package:flutter_art_sense/model/model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_art_sense/screens/artists_detail.dart';
 import 'package:flutter_art_sense/screens/popular_paintings.dart';

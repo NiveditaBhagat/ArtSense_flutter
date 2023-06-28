@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_art_sense/controller/carousel_api.dart';
-import 'package:flutter_art_sense/model/carousel_image.dart';
+import 'package:flutter_art_sense/controller/controller.dart';
+import 'package:flutter_art_sense/model/model.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 

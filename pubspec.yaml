@@ -45,6 +45,7 @@ dependencies:
   path_provider: ^2.0.15
   image: ^3.3.0
   image_picker: ^0.8.9
+  provider: ^6.0.5
   
 dependency_overrides:
   cached_network_image: any

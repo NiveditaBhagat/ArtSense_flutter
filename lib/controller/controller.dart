@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter_art_sense/model/carousel_image.dart';
+import 'package:flutter_art_sense/model/model.dart';
 import 'package:http/http.dart' as http;
 
 class CarouselApi {
