@@ -14,7 +14,7 @@ class _ArtScannerState extends State<ArtScanner> {
   CameraController? _controller;
   List<CameraDescription>? _cameras;
   File? _image;
-   String output = '';
+  String output = '';
 
   @override
   void initState() {
@@ -23,65 +23,62 @@ class _ArtScannerState extends State<ArtScanner> {
     loadModel();
   }
 
- Future<void> setupCamera() async {
-  _cameras = await availableCameras();
-  print("Available cameras: $_cameras");
-  if (_cameras != null && _cameras!.isNotEmpty) {
-    _controller = CameraController(_cameras![0], ResolutionPreset.medium);
-    await _controller!.initialize();
+  Future<void> setupCamera() async {
+    _cameras = await availableCameras();
+    print("Available cameras: $_cameras");
+    if (_cameras != null && _cameras!.isNotEmpty) {
+      _controller = CameraController(_cameras![0], ResolutionPreset.medium);
+      await _controller!.initialize();
 
-    setState(() {}); // Add this line to trigger a rebuild after camera initialization
+      setState(() {}); // Add this line to trigger a rebuild after camera initialization
+    }
   }
-}
-
 
   Future<void> loadModel() async {
     await Tflite.loadModel(
-      model: 'assets/model.tflite', 
-      labels: 'assets/labels.txt', 
+      model: 'assets/model.tflite',
+      labels: 'assets/labels.txt',
     );
   }
-Future<void> runInference(File? image) async {
-  if (image == null) return;
 
-  final predictions = await Tflite.runModelOnImage(
-    path: image.path,
-    numResults: 5,
-    threshold: 0.5,
-  );
-    if (predictions != null && predictions.isNotEmpty){
-       final labelCounts = <String, int>{};
-       for (final prediction in predictions) {
+  Future<void> runInference(File? image) async {
+    if (image == null) return;
+
+    final predictions = await Tflite.runModelOnImage(
+      path: image.path,
+      numResults: 4,
+      threshold: 0.05,
+    );
+    if (predictions != null && predictions.isNotEmpty) {
+      final labelCounts = <String, int>{};
+      for (final prediction in predictions) {
         final label = prediction['label'] as String;
         final text = label.replaceAll(RegExp(r'[0-9]'), '');
         labelCounts[text] = (labelCounts[text] ?? 0) + 1;
       }
-      
+
       String mostFrequentLabel = '';
       int maxCount = 0;
-       labelCounts.forEach((label, count) {
+      labelCounts.forEach((label, count) {
         if (count > maxCount) {
           maxCount = count;
           mostFrequentLabel = label;
         }
       });
-         setState(() {
+      setState(() {
         output = mostFrequentLabel.trim();
       });
-       await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ResultScreen(
-          image: image,
-          predictions: output,
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ResultScreen(
+            image: image,
+            predictions: output,
+          ),
         ),
-      ),
-    );
+      );
     }
- 
-}
-
-
+  }
 
   Future<void> pickImage() async {
     try {
@@ -108,27 +105,64 @@ Future<void> runInference(File? image) async {
 
   @override
   Widget build(BuildContext context) {
-    if (_cameras == null || _cameras!.isEmpty||!_controller!.value.isInitialized) {
+    if (_cameras == null || _cameras!.isEmpty || !_controller!.value.isInitialized) {
       return Scaffold(
         body: Center(
-          child: Text('No cameras available'),
+          child: CircularProgressIndicator(color: Colors.white),
         ),
       );
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Art Scanner'),
-      ),
-      body: _controller != null && _controller!.value.isInitialized
-          ? AspectRatio(
-              aspectRatio: _controller!.value.aspectRatio,
-              child: CameraPreview(_controller!),
-            )
-          : Container(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: pickImage,
-        child: Icon(Icons.camera_alt),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: CameraPreview(_controller!), // Camera preview covering the whole screen
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.7,
+              height: MediaQuery.of(context).size.width * 0.7,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.black.withOpacity(0.5), // Opacity of the outside container
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: AspectRatio(
+                  aspectRatio: _controller!.value.aspectRatio,
+                  child: CameraPreview(_controller!),
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  FloatingActionButton(
+                    onPressed: pickImage,
+                    child: Icon(Icons.camera_alt),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Scan artwork',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
