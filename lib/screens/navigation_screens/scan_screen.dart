@@ -40,45 +40,48 @@ class _ArtScannerState extends State<ArtScanner> {
       labels: 'assets/labels.txt',
     );
   }
+Future<void> runInference(File? image) async {
+  if (image == null) return;
 
-  Future<void> runInference(File? image) async {
-    if (image == null) return;
+  final predictions = await Tflite.runModelOnImage(
+    path: image.path,
+    numResults: 4,
+    threshold: 0.05,
+  );
 
-    final predictions = await Tflite.runModelOnImage(
-      path: image.path,
-      numResults: 4,
-      threshold: 0.05,
-    );
-    if (predictions != null && predictions.isNotEmpty) {
-      final labelCounts = <String, int>{};
-      for (final prediction in predictions) {
-        final label = prediction['label'] as String;
-        final text = label.replaceAll(RegExp(r'[0-9]'), '');
-        labelCounts[text] = (labelCounts[text] ?? 0) + 1;
-      }
+  String mostFrequentLabel = '';
+  int maxCount = 0;
 
-      String mostFrequentLabel = '';
-      int maxCount = 0;
-      labelCounts.forEach((label, count) {
-        if (count > maxCount) {
-          maxCount = count;
-          mostFrequentLabel = label;
-        }
-      });
-      setState(() {
-        output = mostFrequentLabel.trim();
-      });
-      await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ResultScreen(
-            image: image,
-            predictions: output,
-          ),
-        ),
-      );
+  if (predictions != null && predictions.isNotEmpty) {
+    final labelCounts = <String, int>{};
+    for (final prediction in predictions) {
+      final label = prediction['label'] as String;
+      final text = label.replaceAll(RegExp(r'[0-13]'), '');
+      labelCounts[text] = (labelCounts[text] ?? 0) + 1;
     }
+
+    labelCounts.forEach((label, count) {
+      if (count > maxCount) {
+        maxCount = count;
+        mostFrequentLabel = label;
+      }
+    });
   }
+
+  setState(() {
+    output = mostFrequentLabel.trim();
+  });
+
+  await Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => ResultScreen(
+        image: image,
+        predictions: output,
+      ),
+    ),
+  );
+}
 
   Future<void> pickImage() async {
     try {
@@ -117,16 +120,18 @@ class _ArtScannerState extends State<ArtScanner> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: CameraPreview(_controller!), // Camera preview covering the whole screen
+            child: Container(
+              color: Colors.black, // Opacity of the outside container
+            ),
           ),
           Align(
             alignment: Alignment.center,
             child: Container(
               width: MediaQuery.of(context).size.width * 0.7,
-              height: MediaQuery.of(context).size.width * 0.7,
+              height: MediaQuery.of(context).size.width * 1,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Colors.black.withOpacity(0.5), // Opacity of the outside container
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.transparent, // Transparent background for the middle container
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
@@ -146,12 +151,13 @@ class _ArtScannerState extends State<ArtScanner> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   FloatingActionButton(
+                    backgroundColor: Colors.white,
                     onPressed: pickImage,
-                    child: Icon(Icons.camera_alt),
+                    child: Icon(Icons.camera_alt,color: Colors.grey,),
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'Scan artwork',
+                    'Scan Artwork',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
