@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_art_sense/model/model.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
 
 class CarouselApi {
   static const String apiUrl =
@@ -84,6 +85,24 @@ class ArtistsController {
     }
   }
 }
+
+class Search_Controller {
+  final String apiUrl = 'http://www.wikiart.org/en/search/KEYWORD/1?json=2';
+
+  Future<List<Map<String, dynamic>>> searchImages(String keyword) async {
+    final response = await http.get(Uri.parse(apiUrl.replaceFirst('KEYWORD', keyword)));
+
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonData = jsonDecode(response.body);
+      return jsonData.map((data) => data as Map<String, dynamic>).toList();
+    } else {
+      throw Exception('Failed to load search results');
+    }
+  }
+}
+
+
+
 
 
 
