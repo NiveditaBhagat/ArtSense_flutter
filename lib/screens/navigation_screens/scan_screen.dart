@@ -46,30 +46,26 @@ Future<void> runInference(File? image) async {
   final predictions = await Tflite.runModelOnImage(
     path: image.path,
     numResults: 4,
-    threshold: 0.05,
+    threshold: 0.1,
   );
 
-  String mostFrequentLabel = '';
-  int maxCount = 0;
+  String mostConfidentLabel = '';
+  double maxConfidence = 0;
 
   if (predictions != null && predictions.isNotEmpty) {
-    final labelCounts = <String, int>{};
     for (final prediction in predictions) {
       final label = prediction['label'] as String;
-      final text = label.replaceAll(RegExp(r'[0-13]'), '');
-      labelCounts[text] = (labelCounts[text] ?? 0) + 1;
-    }
+      final confidence = prediction['confidence'] as double;
 
-    labelCounts.forEach((label, count) {
-      if (count > maxCount) {
-        maxCount = count;
-        mostFrequentLabel = label;
+      if (confidence > maxConfidence) {
+        maxConfidence = confidence;
+        mostConfidentLabel = label;
       }
-    });
+    }
   }
 
   setState(() {
-    output = mostFrequentLabel.trim();
+    output = mostConfidentLabel.trim();
   });
 
   await Navigator.push(
