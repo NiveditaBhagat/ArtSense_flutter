@@ -20,7 +20,7 @@ class _SearchScreenState extends State<SearchScreen> {
       });
     } catch (e) {
       // Handle error
-    }
+    }  
   }
 
   @override
