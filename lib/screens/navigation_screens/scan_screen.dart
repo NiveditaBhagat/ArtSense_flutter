@@ -64,9 +64,8 @@ Future<void> runInference(File? image) async {
     }
   }
 
-  setState(() {
-    output = mostConfidentLabel.trim();
-  });
+  // Extract the prediction without the class number
+  final output = mostConfidentLabel.split(' ').skip(1).join(' ');
 
   await Navigator.push(
     context,
@@ -78,6 +77,8 @@ Future<void> runInference(File? image) async {
     ),
   );
 }
+
+
 
   Future<void> pickImage() async {
     try {
