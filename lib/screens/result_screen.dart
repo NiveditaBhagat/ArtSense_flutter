@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_art_sense/controller/prediction_descriptions.dart';
+import 'package:flutter_art_sense/widgets/button.dart';
 
 class ResultScreen extends StatelessWidget {
   final File? image;
@@ -49,8 +50,13 @@ class ResultScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),
+              MyButton(
+            onPressed: (){},
+            text: 'Save',
+          ),
             ],
           ),
+          
         ),
       ),
     );
