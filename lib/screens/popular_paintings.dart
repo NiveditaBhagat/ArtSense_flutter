@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_art_sense/controller/controller.dart';
 import 'package:flutter_art_sense/model/model.dart';
+import 'package:flutter_art_sense/screens/full_screen.dart';
+import 'package:flutter_art_sense/screens/navigation_screens/collection_screen.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -47,6 +49,18 @@ class _PopularPaintingScreenState extends State<PopularPaintingScreen> with Tick
     });
   }
 
+    void saveImageToCollection(String imageUrl) {
+    // Call this function to save the image URL to the collection
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Collectionscreen(
+      
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -79,7 +93,13 @@ class _PopularPaintingScreenState extends State<PopularPaintingScreen> with Tick
                         return Column(
                           children: [
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> FullScreen(
+                                  imageUrl: painting.popular_paintings,
+                                  title: painting. popular_title,
+                                  onSave: saveImageToCollection,
+                                  )));
+                              },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: CachedNetworkImage(

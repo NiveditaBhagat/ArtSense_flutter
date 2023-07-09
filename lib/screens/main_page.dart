@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_art_sense/screens/home_page.dart';
+import 'package:flutter_art_sense/widgets/button.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key});
@@ -56,27 +57,10 @@ class MainPage extends StatelessWidget {
           Positioned(
             bottom: 70,
             left: 133,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Get Started',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+            child: MyButton(
+              onPressed:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));},        
+              text: 'Get Started',
               ),
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(100, 45),
-                primary: Colors.white,
-                shape: StadiumBorder(),
-              ),
-            ),
           ),
         ],
       ),
