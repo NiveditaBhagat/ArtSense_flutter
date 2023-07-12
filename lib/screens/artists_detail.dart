@@ -122,6 +122,7 @@ String extractDesiredSection(dom.Element content) {
                   color: Colors.white,
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'PlayfairDisplay-Bold',
                 ),
               ),
             ),
@@ -169,6 +170,7 @@ String extractDesiredSection(dom.Element content) {
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
+                          fontFamily: 'PlayfairDisplay-ExtraBold',
                         ),
                       ),
                       SizedBox(height: 10),
@@ -178,7 +180,12 @@ String extractDesiredSection(dom.Element content) {
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
                                article,
-                              style: TextStyle(fontSize: 21, color: Colors.black),
+                              style: TextStyle(
+                                fontSize: 21, 
+                                color: Colors.black,
+                                fontFamily: 'PlayfairDisplay-SemiBold',)
+                                ,
+                              
                             ),
                           ),
                         ),

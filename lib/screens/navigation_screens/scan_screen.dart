@@ -108,6 +108,7 @@ Future<void> runInference(File? image) async {
     if (_cameras == null || _cameras!.isEmpty || !_controller!.value.isInitialized) {
       return Scaffold(
         body: Center(
+          
           child: CircularProgressIndicator(color: Colors.white),
         ),
       );

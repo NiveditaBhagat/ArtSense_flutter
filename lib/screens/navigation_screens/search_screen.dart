@@ -27,7 +27,10 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search Artworks', style: TextStyle(fontWeight: FontWeight.w600),),
+        title: Text('Search Artworks', style: TextStyle(
+          color: Colors.white,
+          fontFamily: ' PlayfairDisplay-SemiBold',
+          ),),
         backgroundColor: Colors.black,
       ),
      backgroundColor: Colors.black,
@@ -37,6 +40,7 @@ class _SearchScreenState extends State<SearchScreen> {
           
           children: [
             Container(
+              height: 40,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
               ),

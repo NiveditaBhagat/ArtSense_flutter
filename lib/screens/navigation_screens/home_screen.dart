@@ -47,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Container(
@@ -84,6 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
+                              fontFamily: 'PlayfairDisplay-SemiBold',
                             ),
                           ),
                         ),
@@ -118,6 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.white,
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
+                        fontFamily: 'PlayfairDisplay-ExtraBold',
                       ),
                     ),
                   ),
@@ -131,7 +134,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Color(0xFFFF4B26),
+                     fontFamily: 'PlayfairDisplay-Bold',
                   ),
                 ),
               ),
@@ -177,7 +181,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 12,
-                              fontWeight: FontWeight.bold,
+                             // fontWeight: FontWeight.bold,
+                               fontFamily: 'PlayfairDisplay-SemiBold',
                             ),
                           ),
                         ),

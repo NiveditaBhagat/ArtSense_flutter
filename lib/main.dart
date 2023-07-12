@@ -1,4 +1,4 @@
-
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_art_sense/screens/onboarding_page.dart';
@@ -8,6 +8,7 @@ List<CameraDescription>? cameras;
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   cameras=await availableCameras();
+  await Hive.initFlutter();
   runApp(const MyApp());
 }
 

@@ -40,6 +40,7 @@ class MainPage extends StatelessWidget {
                 color: Colors.white,
                 fontSize: 48,
                 fontWeight: FontWeight.bold,
+                fontFamily: 'PlayfairDisplay-ExtraBold',
               ),
             ),
           ),
@@ -51,15 +52,18 @@ class MainPage extends StatelessWidget {
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
+                fontFamily: 'PlayfairDisplay-Bold',
               ),
             ),
           ),
           Positioned(
             bottom: 70,
-            left: 133,
+            left: 120,
             child: MyButton(
               onPressed:(){Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));},        
               text: 'Get Started',
+              color: Colors.white,
+              textColor: Colors.black,
               ),
           ),
         ],

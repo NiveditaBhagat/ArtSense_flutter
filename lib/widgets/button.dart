@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class MyButton extends StatelessWidget {
  final  Function onPressed;
 final String text;
-  const MyButton({super.key, required this.onPressed, required this.text});
+final Color color;
+final Color textColor;
+  const MyButton({super.key, required this.onPressed, required this.text, required this.color, required this.textColor});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ final String text;
                 child: Text(
                   text,
                   style: TextStyle(
-                    color: Colors.black,
+                    color: textColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -23,7 +25,7 @@ final String text;
               ),
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(100, 45),
-                primary: Colors.white,
+                primary: color,
                 shape: StadiumBorder(),
               ),
             );

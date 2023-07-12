@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_art_sense/screens/main_page.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:introduction_slider/introduction_slider.dart';
 import 'package:flutter_art_sense/widgets/text_widget.dart';
 
@@ -14,7 +15,14 @@ class OnBoardingPage extends StatelessWidget {
       child: IntroductionSlider(
         items:  [
           IntroductionSliderItem(
-            logo: Text("ArtSense", style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold, color: Colors.white),),
+            logo: Text(
+             "ArtSense", 
+             style: TextStyle(
+              fontSize: 34,
+              fontWeight: FontWeight.bold,
+               color: Colors.white,
+               fontFamily: 'PlayfairDisplay-ExtraBold',
+               ),),
             title: Expanded(
               flex: 5,
               child: Column(
@@ -22,7 +30,16 @@ class OnBoardingPage extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: TextDecoration( fontWeight: FontWeight.bold, fontSize: 25, title: "Welcome to ArtSense",),
+                    child: Text( 
+                      style: TextStyle(
+                        fontFamily: 'PlayfairDisplay-Bold',
+                        fontWeight: FontWeight.bold, 
+                         fontSize: 25, 
+                         color: Colors.white,
+                        ),
+                      "Welcome to ArtSense",
+                      
+                      ),
                   ),
                 ],
               )),
@@ -32,9 +49,14 @@ class OnBoardingPage extends StatelessWidget {
               flex: 1,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: TextDecoration(
-                title:  "Discover the world's most exquisite art pieces, immerse yourself in the beauty of different art forms, and explore the rich history of art.",
-                   fontSize: 17),
+                child: Text(
+                  "     Discover the world's most exquisite art        pieces, immerse yourself in the beauty of       different art forms, and explore the rich history of art.",
+                   style: TextStyle(
+                    fontSize: 17,
+                    fontFamily: 'PlayfairDisplay-SemiBold',
+                    color: Colors.white,
+                   ),
+                   ),
               ),
             ),
           
@@ -56,7 +78,15 @@ class OnBoardingPage extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: TextDecoration(title:"Immerse Yourself in Art" , fontSize: 25, fontWeight: FontWeight.bold,),
+                    child: Text(
+                  "Immerse Yourself in Art" ,
+                  style: TextStyle(
+                     fontSize: 25, 
+                     fontWeight: FontWeight.bold,
+                    fontFamily: 'PlayfairDisplay-Bold',
+                    color: Colors.white
+                  ),
+                 ),
                   ),
                 ],
               )),
@@ -65,8 +95,14 @@ class OnBoardingPage extends StatelessWidget {
                flex: 1,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: TextDecoration(title: 'Browse through thousands of artworks from various eras and genres', 
-                fontSize: 17),
+                child: Text(
+                  'Browse through thousands of artworks      from various eras and genres', 
+                  style: TextStyle(
+                     fontSize: 17,
+                     color: Colors.white,
+                     fontFamily: 'PlayfairDisplay-SemiBold',
+                  ),
+               ),
               ),
             ),
            
@@ -88,7 +124,14 @@ class OnBoardingPage extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Center(child: Text("Discover the Artists Behind the Art", style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),)),
+                      child: Center(child: Text(
+                        "Discover the Artists Behind                           the Art", 
+                        style: TextStyle(
+                          color: Colors.white, 
+                          fontSize: 25, 
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'PlayfairDisplay-Bold',
+                          ),)),
                     ),
                   ],
                 )),
@@ -99,7 +142,10 @@ class OnBoardingPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Text(' Learn about the artists who created the masterpieces you love. Discover their unique styles, inspirations, and techniques',
-                    style: TextStyle(color: Colors.white,fontSize: 17),
+                    style: TextStyle(
+                      color: Colors.white,fontSize: 17,
+                      fontFamily: 'PlayfairDisplay-SemiBold',
+                      ),
                     ),
                   ),
                 ),
