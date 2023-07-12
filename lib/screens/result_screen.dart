@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_art_sense/controller/prediction_descriptions.dart';
+import 'package:flutter_art_sense/save_images_box.dart';
+import 'package:flutter_art_sense/screens/navigation_screens/collection_screen.dart';
 import 'package:flutter_art_sense/widgets/button.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -34,9 +36,10 @@ class ResultScreen extends StatelessWidget {
                   child: Text(
                     predictions,
                     style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
+                      fontSize: 24,
+                      color: Color(0xFFFF4B26),
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'PlayfairDisplay-Bold',
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -47,12 +50,22 @@ class ResultScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
                   description,
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 16, color: Colors.white,
+                    fontFamily: 'PlayfairDisplay-SemiBold',
+                    ),
                 ),
               ),
               MyButton(
-            onPressed: (){},
+            onPressed: (){
+              final savedImagesBox = SavedImagesBox();
+            savedImagesBox.addImage(image!);
+       Navigator.push(context,MaterialPageRoute(
+                builder: (context) => Collectionscreen(),),);
+            },
             text: 'Save',
+            color: Color(0xFFFF4B26),
+            textColor: Colors.white,
           ),
             ],
           ),

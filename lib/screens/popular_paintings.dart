@@ -49,17 +49,17 @@ class _PopularPaintingScreenState extends State<PopularPaintingScreen> with Tick
     });
   }
 
-    void saveImageToCollection(String imageUrl) {
-    // Call this function to save the image URL to the collection
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Collectionscreen(
+  //   void saveImageToCollection(String imageUrl) {
+  //   // Call this function to save the image URL to the collection
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) => Collectionscreen(
       
-        ),
-      ),
-    );
-  }
+  //       ),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +97,7 @@ class _PopularPaintingScreenState extends State<PopularPaintingScreen> with Tick
                                 Navigator.push(context, MaterialPageRoute(builder: (context)=> FullScreen(
                                   imageUrl: painting.popular_paintings,
                                   title: painting. popular_title,
-                                  onSave: saveImageToCollection,
+                                  
                                   )));
                               },
                               child: ClipRRect(

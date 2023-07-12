@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed, 
           unselectedItemColor:Colors.grey[500],
          backgroundColor: Colors.grey[900],
-           selectedItemColor: Colors.white,
+           selectedItemColor:  Color(0xFFFF4B26),
                onTap: (value) {
           setState(() {
             pageIdx=value;
